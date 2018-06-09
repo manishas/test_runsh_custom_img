@@ -1,0 +1,31 @@
+resources:
+  - name: myGitrepo
+    type: gitRepo
+    integration: github-manishas
+    versionTemplate:     
+      sourceName: devops-recipes/build_alpine_ci_image
+      branch: master
+    buildOnCommit: true
+    buildOnTagPush: true
+    
+jobs:
+  - name: use_custom_image
+    type: runSh
+    steps:
+      - IN: myGitrepo    # Configuring this as IN automatically logs you into your Docker registry
+        switch: off
+      - TASK:
+          name: build_custom_image
+          script:
+            - docker build -t=devopsrecipes/build_alpine_ci:$BUILD_NUMBER .
+       - TASK:
+           name: need_to_use_custom_container
+           runtime:
+             options:
+               imageName: devopsrecipes/build_alpine_ci    # Your image
+               imageTag: $BUILD_NUMBER                     # Your image tag  
+               pull: false                                 # We already pulled image
+               options: --dns=4.4.4.4 --dns=8.8.8.8        # This is optional
+           script:
+             - echo "Checking runtime values"              # Commands will run in container
+             - sudo docker info    
