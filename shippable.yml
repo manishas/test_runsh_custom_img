@@ -18,14 +18,14 @@ jobs:
           name: build_custom_image
           script:
             - pushd $(shipctl get_resource_state "myGitrepo")
-            - docker build -t=devopsrecipes/build_alpine_ci:$BUILD_NUMBER -f Dockerfile.alpine37 --pull .
+            - docker build -t=devopsrecipes/build_alpine_ci -f Dockerfile.alpine37 --pull .
             - popd
       - TASK:
           name: need_to_use_custom_container
           runtime:
             options:
               imageName: devopsrecipes/build_alpine_ci    # Your image
-              imageTag: $BUILD_NUMBER                     # Your image tag  
+              imageTag: latest                            # Your image tag  
               pull: false                                 # We already pulled image
               options: --dns=4.4.4.4 --dns=8.8.8.8        # This is optional
           script:
