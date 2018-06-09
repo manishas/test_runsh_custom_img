@@ -18,7 +18,7 @@ jobs:
           name: build_custom_image
           script:
             - pushd $(shipctl get_resource_state "myGitrepo")
-            - docker build -t=devopsrecipes/build_alpine_ci:$BUILD_NUMBER .
+            - docker build -t=devopsrecipes/build_alpine_ci:$BUILD_NUMBER -f Dockerfile.alpine37 --pull .
             - popd
       - TASK:
           name: need_to_use_custom_container
