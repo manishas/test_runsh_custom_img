@@ -12,8 +12,8 @@ resources:
     type: params
     versionTemplate:
       params:
-        USERNAME: tbd
-        PASSWORD: tbd
+        username: tbd
+        password: tbd
 
 jobs:
   - name: use_custom_image
