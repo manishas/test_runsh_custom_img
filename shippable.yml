@@ -44,12 +44,14 @@ jobs:
     steps:
       - OUT: myEnv
       - TASK:
-        - shipctl put_resource_state_multi myEnv "username" "admin" "password" "admin123"
+          script:
+            - shipctl put_resource_state_multi myEnv "username" "admin" "password" "admin123"
         
   - name: read_from_params
     type: runSh
     steps:
       - IN: myEnv
       - TASK:
-        - echo $username
-        - echo $password        
+          script:
+            - echo $username
+            - echo $password        
