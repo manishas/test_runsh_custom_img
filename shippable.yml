@@ -45,7 +45,7 @@ jobs:
       - OUT: myEnv
       - TASK:
           script:
-            - shipctl put_resource_state_multi myEnv "username" "admin" "password" "admin123"
+            - shipctl put_resource_state_multi "myEnv" "username=admin password=admin123"
         
   - name: read_from_params
     type: runSh
