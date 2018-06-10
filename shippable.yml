@@ -7,7 +7,14 @@ resources:
       branch: master
     buildOnCommit: true
     buildOnTagPush: true
-    
+
+  - name: myEnv
+    type: params
+    versionTemplate:
+      params:
+        USERNAME: tbd
+        PASSWORD: tbd
+
 jobs:
   - name: use_custom_image
     type: runSh
@@ -31,3 +38,18 @@ jobs:
           script:
             - echo "Checking runtime values"              # Commands will run in container
             - sudo docker info    
+
+  - name: write_to_params
+    type: runSh
+    steps:
+      - OUT: myEnv
+      - TASK:
+        - shipctl put_resource_state_multi myEnv "username" "admin" "password" "admin123"
+        
+  - name: read_from_params
+    type: runSh
+    steps:
+      - IN: myEnv
+      - TASK:
+        - echo $username
+        - echo $password        
