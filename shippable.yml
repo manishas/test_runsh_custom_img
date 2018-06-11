@@ -44,8 +44,13 @@ jobs:
     steps:
       - OUT: myEnv
       - TASK:
+          runtime:                  
+            options:
+              env:                  
+                - secure: tBAG0ovnUdTQUxCNS8x4KDJsihaEc7sTMiJsJ/hQBaqNpqHKfot6JzNEHKvZvWC33iBTrb52eQbiGnj1RJMItpx+aZ1kUr0MR4HD3xLSnLOljb3G4Sc/3njkJ5T5/XFn4CI1gb2QpTLZQx45RaWC8KCKhsViavKFhN5krDnMdjS6zIoukYj9iKcY014oYx3BpU8KAG1cKANuzA8vDLPUMagDMHi2CNcOGjOu6iIjNYyOxP3GhqsgDKFBUnjvWTCCswXzy/lirOxJiMfgIunSFHr2+Vc7hXnCP+j/mXzhSRkh4IHPe+6PqM1t1E4hhguqrwdrUnHfV6IvMlceC/EZ5g== 
           script:
             - shipctl put_resource_state_multi "myEnv" "username=admin password=admin123"
+            - echo $MYTEST
         
   - name: read_from_params
     type: runSh
