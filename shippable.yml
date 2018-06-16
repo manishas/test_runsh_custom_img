@@ -78,7 +78,9 @@ jobs:
             - pushd $(shipctl get_resource_state "thisGitrepo")
             - TRANSFER=$(shipctl get_resource_state write_file_to_state)
             - echo $TRANSFER
-            - cp ./testcontent.txt $TRANSFER/testcontent.txt
+            - tar cvfR $TRANSFER/transfer.tar ./testcontent.txt
+            - sha1sum $TRANSFER/transfer.tar
+            #- cp ./testcontent.txt $TRANSFER/testcontent.txt
             - popd
 
   - name: read_file_from_state
@@ -89,6 +91,8 @@ jobs:
           script:
             - TRANSFER=$(shipctl get_resource_state write_file_to_state)
             - echo $TRANSFER
-            - cp $TRANSFER/testcontent.txt ./testcontent.txt
+            - sha1sum $TRANSFER/transfer.tar
+            - tar xvf $TRANSFER/transfer.tar
+            #- cp $TRANSFER/testcontent.txt ./testcontent.txt
             - cat ./testcontent.txt
 
