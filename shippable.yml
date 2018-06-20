@@ -26,6 +26,10 @@ resources:
     type: integration
     integration: dummyInt  
 
+  - name: myECR
+    type: integration
+    integration: manishas-ecr  
+
 jobs:
   - name: use_custom_image
     type: runSh
@@ -108,3 +112,5 @@ jobs:
           script:
             - MY_ACCESS_KEY=$(shipctl get_integration_resource_field "myAWS" "accessKey")
             - echo $MY_ACCESS_KEY
+            - MY_ECR_ACCESS_KEY=$(shipctl get_integration_resource_field "myECR" "aws_access_key_id")
+            - echo $MY_ECR_ACCESS_KEY
