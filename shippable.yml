@@ -21,6 +21,10 @@ resources:
       params:
         username: tbd
         password: tbd
+  
+  - name: myAWS
+    type: integration
+    integration: dummyInt  
 
 jobs:
   - name: use_custom_image
@@ -96,3 +100,11 @@ jobs:
             #- cp $TRANSFER/testcontent.txt ./testcontent.txt
             - cat ./testcontent.txt
 
+  - name: print_dummyInt
+    type: runSh
+    steps:
+      - IN: myAWS    
+      - TASK:
+          script:
+            - MY_ACCESS_KEY="$(shipctl get_integration_resource_field "myAWS" "accesskeyid")"
+            - echo $MY_ACCESS_KEY
