@@ -107,7 +107,8 @@ jobs:
   - name: print_dummyInt
     type: runSh
     steps:
-      - IN: myAWS    
+      - IN: myAWS  
+      - IN: myECR
       - TASK:
           script:
             - MY_ACCESS_KEY=$(shipctl get_integration_resource_field "myAWS" "accessKey")
