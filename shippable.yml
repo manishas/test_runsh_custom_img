@@ -106,5 +106,5 @@ jobs:
       - IN: myAWS    
       - TASK:
           script:
-            - MY_ACCESS_KEY=$(shipctl get_integration_resource_field "myAWS" "accesskeyid")
+            - MY_ACCESS_KEY=$(shipctl get_integration_resource_field "myAWS" "accessKey")
             - echo $MY_ACCESS_KEY
