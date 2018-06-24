@@ -1,3 +1,13 @@
+language: node_js
+
+node_js:
+  - 0.12
+  
+build:
+  ci:
+    - echo $JOB_TRIGGERED_BY_NAME
+
+
 resources:
   - name: myGitrepo
     type: gitRepo
@@ -115,3 +125,12 @@ jobs:
             - echo $MY_ACCESS_KEY
             - MY_ECR_ACCESS_KEY=$(shipctl get_integration_resource_field "myECR" "aws_access_key_id")
             - echo $MY_ECR_ACCESS_KEY
+
+  - name: test_runsh_custom_img_runCI
+    type: runCI
+    steps:
+      - IN: print_dummyInt
+  
+  
+  
+  
