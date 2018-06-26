@@ -6,6 +6,7 @@ node_js:
 build:
   ci:
     - echo $JOB_TRIGGERED_BY_NAME
+    - echo $COMMIT
 
 
 resources:
