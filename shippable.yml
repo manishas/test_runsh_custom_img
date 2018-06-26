@@ -144,7 +144,7 @@ jobs:
     steps:
       - TASK:
           script:
-            - shipctl put_resource_state_multi app_img "versionName=$BUILD_NUMBER sourceName=manishas/testimg"
+            - shipctl put_resource_state_multi myImg "versionName=$BUILD_NUMBER sourceName=manishas/testimg"
       - OUT: myImg
   
   - name: test_img_sourcename_get
