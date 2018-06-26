@@ -147,7 +147,7 @@ jobs:
             - shipctl put_resource_state_multi app_img "versionName=$BUILD_NUMBER sourceName=manishas/testimg"
       - OUT: myImg
   
-   - name: test_img_sourcename_get
+  - name: test_img_sourcename_get
     type: runSh
     steps:
       - IN: myImg    
