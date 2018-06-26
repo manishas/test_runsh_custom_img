@@ -26,6 +26,13 @@ resources:
       sourceName: manishas/test_runsh_custom_img
       branch: master
 
+  - name: myImg
+    type: image
+    integration: manishas-dh
+    versionTemplate:
+      sourceName: foo/bar
+      versionName: hardcodedtag 
+
   - name: myEnv
     type: params
     versionTemplate:
@@ -132,6 +139,22 @@ jobs:
     steps:
       - IN: print_dummyInt
   
+  - name: test_img_sourcename_set
+    type: runSh
+    steps:
+      - TASK:
+          script:
+            - shipctl put_resource_state_multi app_img "versionName=$BUILD_NUMBER sourceName=manishas/testimg"
+      - OUT: myImg
   
-  
+   - name: test_img_sourcename_get
+    type: runSh
+    steps:
+      - IN: myImg    
+      - TASK:
+          script:
+            - SRCNAME=$(shipctl get_resource_version_key "myImg" "sourceName")
+            - echo $SRCNAME
+            - VRSNAME=$(shipctl get_resource_version_key "myImg" "versionName")
+            - echo $VRSNAME
   
