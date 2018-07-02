@@ -7,6 +7,7 @@ build:
   ci:
     - echo $JOB_TRIGGERED_BY_NAME
     - echo $COMMIT
+    - shipctl post_resource_state "myImg" "versionName" "updatedfromci"
 
 
 resources:
@@ -138,6 +139,7 @@ jobs:
     type: runCI
     steps:
       - IN: print_dummyInt
+      - OUT: myImg
   
   - name: test_img_sourcename_set
     type: runSh
