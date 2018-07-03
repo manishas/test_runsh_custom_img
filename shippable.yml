@@ -7,7 +7,7 @@ build:
   ci:
     - echo $JOB_TRIGGERED_BY_NAME
     - echo $COMMIT
-    - shipctl post_resource_state "myImg" "versionName" $BRANCH.$BUILD_NUMBER
+    - shipctl post_resource_state_multi "myImg" "versionName=latest sha=$COMMIT"
 
 
 resources:
