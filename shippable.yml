@@ -9,7 +9,7 @@ build:
     - echo $COMMIT
     - FOO="my image resource"
     - echo $FOO
-    - shipctl post_resource_state_multi "myImg" "versionName=latest sha=$FOO"
+    - shipctl post_resource_state_multi "myImg" 'versionName=latest sha="my images"'
     #- shipctl post_resource_state "myImg" "versionName" "latest"   
 
 
