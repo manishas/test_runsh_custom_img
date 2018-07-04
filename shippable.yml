@@ -179,6 +179,6 @@ jobs:
     on_success:
       script:
         - echo "SUCCESS"
-      - NOTIFY: slack_notif
+      NOTIFY: slack_notif
     #always:
       #- NOTIFY: slack_notif
