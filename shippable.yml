@@ -180,3 +180,5 @@ jobs:
       #script:
         #- echo "SUCCESS"
       - NOTIFY: slack_notif
+    always:
+      - NOTIFY: slack_notif
