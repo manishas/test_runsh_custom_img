@@ -175,10 +175,12 @@ jobs:
             - SRCNAME=$(shipctl get_resource_version_key "myImg" "sourceName")
             - echo $SRCNAME
             - VRSNAME=$(shipctl get_resource_version_key "myImg" "versionName")
-            - echo $VRSNAME
+            - echo $VRSNAME 
     on_success:
       script:
         - echo "SUCCESS"
       NOTIFY: slack_notif
-    #always:
-      #- NOTIFY: slack_notif
+    always:
+      script:
+        - echo "ALWAYS"
+      NOTIFY: slack_notif
