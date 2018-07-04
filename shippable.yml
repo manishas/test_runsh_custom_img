@@ -59,7 +59,14 @@ resources:
 
   - name: myECR
     type: integration
-    integration: manishas-ecr  
+    integration: manishas-ecr 
+
+  - name: slack_notif
+    type: notification
+    integration: ms_slack
+    versionTemplate:
+      recipients:
+        - "#cs"  # Replace with the Slack room name you want
 
 jobs:
   - name: use_custom_image
@@ -175,4 +182,4 @@ jobs:
     on_success:
       script:
         - echo "SUCCESS"
-      NOTIFY: ms_slack
+      NOTIFY: slack_notif
