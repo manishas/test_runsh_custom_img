@@ -13,6 +13,14 @@ build:
     #- shipctl post_resource_state "myImg" "versionName" "latest"   
     - shipctl post_resource_state "myImg" "sha" `"${FOO}"` 
 
+integrations:
+  notifications:
+    - integrationName: ms_slack   
+      type: slack
+      recipients:
+        - "#cs"
+      on_success: always  
+
 
 resources:
   - name: myGitrepo
@@ -152,6 +160,7 @@ jobs:
           script:
             - shipctl put_resource_state_multi myImg "versionName=$BUILD_NUMBER sourceName=manishas/testimg"
       - OUT: myImg
+      
   
   - name: test_img_sourcename_get
     type: runSh
@@ -163,4 +172,7 @@ jobs:
             - echo $SRCNAME
             - VRSNAME=$(shipctl get_resource_version_key "myImg" "versionName")
             - echo $VRSNAME
-  
+     on_success:
+       script:
+          - echo "SUCCESS"
+       NOTIFY: ms_slack  
