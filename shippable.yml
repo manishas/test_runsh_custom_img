@@ -178,5 +178,5 @@ jobs:
             - echo $VRSNAME
     on_success:
       #script:
-        - echo "SUCCESS"
+        #- echo "SUCCESS"
       - NOTIFY: slack_notif
