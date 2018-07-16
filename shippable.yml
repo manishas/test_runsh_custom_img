@@ -67,6 +67,12 @@ resources:
    
   - name: myState
     type: state
+    
+  - name: params_file_test
+    type: params
+    versionTemplate:
+      params:
+        seed: tbd
 
 jobs:
   - name: use_custom_image
@@ -208,3 +214,30 @@ jobs:
             - BUILDNO="$(shipctl get_resource_version_key myState "BUILD_NUM")"
             - echo $BUILDNO
   
+  - name: write_file_to_params_state
+    type: runSh
+    steps:
+      - TASK:
+          script:
+            - pushd $(shipctl get_resource_state "thisGitrepo")
+            - TRANSFER=$(shipctl get_resource_state params_file_test)
+            - echo $TRANSFER
+            #- tar cvfR $TRANSFER/transfer.tar ./testcontent.txt
+            #- sha1sum $TRANSFER/transfer.tar
+            - cp ./testcontent.txt $TRANSFER/testcontent.txt
+            - popd
+      - OUT: params_file_test   
+      
+  - name: read_file_from_params_state
+    type: runSh
+    steps:
+      - IN: params_file_test
+      - TASK:
+          script:
+            - TRANSFER=$(shipctl get_resource_state params_file_test)
+            - echo $TRANSFER
+            #- sha1sum $TRANSFER/transfer.tar
+            #- tar xvf $TRANSFER/transfer.tar
+            - cp $TRANSFER/testcontent.txt ./testcontent.txt
+            - cat ./testcontent.txt      
+      
