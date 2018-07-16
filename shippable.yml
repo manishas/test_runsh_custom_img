@@ -202,7 +202,7 @@ jobs:
     type: runSh
     steps:
       - IN: myState   
-        switch: ON
+        switch: on
       - TASK:
           script:
             - BUILDNO="$(shipctl get_resource_version_key myState "BUILD_NUM")"
