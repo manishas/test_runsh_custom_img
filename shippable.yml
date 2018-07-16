@@ -217,7 +217,8 @@ jobs:
   - name: write_file_to_params_state
     type: runSh
     steps:
-      - TASK:
+      - IN: thisGitrepo    
+      - TASK:  
           script:
             - pushd $(shipctl get_resource_state "thisGitrepo")
             - TRANSFER=$(shipctl get_resource_state params_file_test)
