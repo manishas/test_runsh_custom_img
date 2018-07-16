@@ -64,6 +64,9 @@ resources:
     versionTemplate:
       recipients:
         - "#cs"  # Replace with the Slack room name you want
+   
+  - name: myState
+    type: state
 
 jobs:
   - name: use_custom_image
@@ -186,3 +189,22 @@ jobs:
       script:
         - echo "ALWAYS"
       #NOTIFY: slack_notif
+      
+  - name: job_before_state_res
+    type: runSh
+      steps:
+        - TASK:
+            script:
+              - shipctl post_resource_state myState "BUILD_NUM" "$BUILD_NUMBER"
+        - OUT: myState
+      
+  - name: job_after_state_res
+    type: runSh
+      steps:
+        - IN: myState   
+          switch: ON
+        - TASK:
+            script:
+              - BUILDNO="$(shipctl get_resource_version_key myState "BUILD_NUM")"
+              - echo $BUILDNO
+  
