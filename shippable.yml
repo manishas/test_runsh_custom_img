@@ -60,7 +60,7 @@ resources:
   
   - name: myAWS
     type: integration
-    integration: dummyInt  
+    integration: dummyAWS  
 
   - name: myECR
     type: integration
