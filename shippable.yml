@@ -1,3 +1,5 @@
+myValue: &myValue this_is_a_dummy_value
+
 language: node_js
 
 node_js:
@@ -49,6 +51,12 @@ resources:
       params:
         username: tbd
         password: tbd
+  
+  - name: myEnvVar
+    type: params
+    versionTemplate:
+      params:
+        myKey: *myValue
   
   - name: myAWS
     type: integration
@@ -115,12 +123,14 @@ jobs:
     type: runSh
     steps:
       - IN: myEnv
+      - IN: myEnvVar
       - TASK:
           script:
             - echo $username
-            - echo $password        
+            - echo $password    
+            - echo $myKey
 
-        
+       
   - name: write_file_to_state
     type: runSh
     steps:
